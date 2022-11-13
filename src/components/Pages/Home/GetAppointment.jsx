@@ -7,7 +7,7 @@ const GetAppointment = () => {
     return (
         <div className="hero mt-20 rounded-lg" style={{ backgroundImage: `url(${appointment})` }}>
             <div className="hero-content flex-col lg:flex-row text-white">
-                <img src={extra} className=" lg:max-w-xl -mt-32" alt='' />
+                <img src={extra} className="hidden lg:block lg:max-w-xl -mt-32" alt='' />
                 <div className='lg:w-[479px]'>
                     <h1 className='text-xl text-primary font-bold mb-5'>Appointments</h1>
                     <h1 className="text-4xl font-bold">Make an appointment Today</h1>
