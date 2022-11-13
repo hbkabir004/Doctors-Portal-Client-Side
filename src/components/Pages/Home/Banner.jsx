@@ -1,6 +1,7 @@
 import React from 'react';
 import banner from '../../../assets/images/bg.png';
 import chair from '../../../assets/images/chair.png';
+import PrimaryButton from '../../PrimaryButton';
 
 
 
@@ -13,7 +14,7 @@ const Banner = () => {
                     <div className='lg:w-[655px]'>
                         <h1 className="text-5xl font-bold">Your New Smile Starts <br /> Here</h1>
                         <p className="py-6 lg:w-[400px]">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                        <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white font-bold">Get Started</button>
+                        <PrimaryButton>Get Started</PrimaryButton>
                     </div>
                 </div>
             </div >
