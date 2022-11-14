@@ -26,7 +26,8 @@ const Login = () => {
                             "password",
                             {
                                 required: 'Password is required',
-                                minLength: { value: 6, message: 'Password must be 6 characters or longer' }
+                                minLength: { value: 6, message: 'Password must be 6 characters or longer' },
+                                pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, message: "Password must be strong!" }
                             }
                         )} type="password" className="input input-bordered w-full max-w-xs" />
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
