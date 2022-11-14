@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     // const [data, setData] = useState("");
     const onSubmit = data => console.log(data);
@@ -10,9 +10,16 @@ const Login = () => {
     return (
         <div className='flex justify-center align-middle my-20'>
             <div className='w-96 shadow-xl p-7 rounded-lg'>
-                <h1 className='text-3xl text-center'>Login</h1>
+                <h1 className='text-3xl text-center'>Sign Up</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control w-full max-w-xs">
+                        <label className="label"><span className="label-text-2xl">Name</span></label>
+                        <input {...register(
+                            "name",
+                            { required: "Name is required" }
+                        )}
+                            type="name" className="input input-bordered w-full max-w-xs" />
+                        {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
                         <label className="label"><span className="label-text-2xl">Email</span></label>
                         <input {...register(
                             "email",
@@ -34,7 +41,7 @@ const Login = () => {
                         <input className='btn btn-accent my-5 text-xl font-normal' value="Login" type="submit" />
                     </div>
                 </form>
-                <p className='text-center text-sm'>New to Doctors Portal? <Link className='text-secondary' to='/signup'>Create new accounts</Link> </p>
+                <p className='text-center text-sm'>Already have an account? <Link className='text-secondary' to='/signup'>Login</Link> </p>
                 <div className="divider">OR</div>
                 <button className='btn btn-outline w-full my-5 text-xl font-normal' value="Login" type="submit" >CONTINUE WITH GOOGLE</button>
             </div>
@@ -42,4 +49,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;
