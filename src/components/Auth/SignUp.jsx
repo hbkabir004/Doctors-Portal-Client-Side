@@ -1,3 +1,4 @@
+import { data } from 'autoprefixer';
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
@@ -5,18 +6,26 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider';
 
 const SignUp = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUser } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
-    // const [data, setData] = useState("");
-    // const onSubmit = data => console.log(data);
+    const userInfo = {
+        displayName: data.name,
+    }
+
     const handleSignUp = (data) => {
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast.success('User Created Successfully.')
+                updateUser(userInfo)
+                    .then(() => {
+                        toast.warning('User Profile Updated!')
+                    })
+                    .catch(err => toast.error(err.message))
+
+                toast.success('User Created Successfully.');
             })
-            .catch(error => toast.error(error))
+            .catch(error => toast.error(error.message))
     }
 
     return (
@@ -51,10 +60,10 @@ const SignUp = () => {
                         )} type="password" className="input input-bordered w-full max-w-xs" />
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                         <label className="label"><span className="label-text">Forget Password?</span></label>
-                        <input className='btn btn-accent my-5 text-xl font-normal' value="Login" type="submit" />
+                        <input className='btn btn-accent my-5 text-xl font-normal' value="Sign Up" type="submit" />
                     </div>
                 </form>
-                <p className='text-center text-sm'>Already have an account? <Link className='text-secondary' to='/signup'>Login</Link> </p>
+                <p className='text-center text-sm'>Already have an account? <Link className='text-secondary' to='/login'>Login</Link> </p>
                 <div className="divider">OR</div>
                 <button className='btn btn-outline w-full my-5 text-xl font-normal' value="Login" type="submit" >CONTINUE WITH GOOGLE</button>
             </div>

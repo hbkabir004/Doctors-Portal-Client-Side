@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Login = () => {
+    const { SignIn } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
     // const [data, setData] = useState("");
-    const onSubmit = data => console.log(data);
+    // const onSubmit = data => console.log(data);
+    const handleSignIn = data => {
+        SignIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('SignIn Successfully.')
+            })
+            .catch(error => toast.error(error.message))
+    }
 
     return (
         <div className='flex justify-center align-middle my-20'>
             <div className='w-96 shadow-xl p-7 rounded-lg'>
                 <h1 className='text-3xl text-center'>Login</h1>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(handleSignIn)}>
                     <div className="form-control w-full max-w-xs">
                         <label className="label"><span className="label-text-2xl">Email</span></label>
                         <input {...register(
