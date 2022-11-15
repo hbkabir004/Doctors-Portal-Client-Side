@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider';
 
 const SignUp = () => {
-    const { createUser, updateUser } = useContext(AuthContext);
+    const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const userInfo = {
         displayName: data.name,
@@ -26,6 +26,16 @@ const SignUp = () => {
                 toast.success('User Created Successfully.');
             })
             .catch(error => toast.error(error.message))
+    }
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('User Created Successfully.');
+            })
+            .catch(err => toast.error(err.message))
     }
 
     return (
@@ -65,7 +75,7 @@ const SignUp = () => {
                 </form>
                 <p className='text-center text-sm'>Already have an account? <Link className='text-secondary' to='/login'>Login</Link> </p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full my-5 text-xl font-normal' value="Login" type="submit" >CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full my-5 text-xl font-normal' value="Login" type="submit" >CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );

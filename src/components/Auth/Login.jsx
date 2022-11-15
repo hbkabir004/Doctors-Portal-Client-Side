@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider';
 
 const Login = () => {
-    const { SignIn } = useContext(AuthContext);
+    const { SignIn, googleSignIn } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
     // const [data, setData] = useState("");
     // const onSubmit = data => console.log(data);
@@ -17,6 +17,16 @@ const Login = () => {
                 toast.success('SignIn Successfully.')
             })
             .catch(error => toast.error(error.message))
+    }
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('SignIn Successfully.')
+            })
+            .catch(err => toast.error(err.message))
     }
 
     return (
@@ -49,7 +59,7 @@ const Login = () => {
                 </form>
                 <p className='text-center text-sm'>New to Doctors Portal? <Link className='text-secondary' to='/signup'>Create new accounts</Link> </p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full my-5 text-xl font-normal' value="Login" type="submit" >CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full my-5 text-xl font-normal' value="Login" type="submit" >CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );
