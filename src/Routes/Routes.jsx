@@ -8,6 +8,7 @@ import Dashboard from "../components/Pages/Dashboard";
 import ErrorPage from "../components/Pages/ErrorPage";
 import Home from "../components/Pages/Home/Home";
 import Reviews from "../components/Pages/Reviews";
+import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import PrivateRoute from "./PrivateRoute";
 
@@ -52,7 +53,13 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>
+            }
+        ]
     }
 ])
 

@@ -1,11 +1,12 @@
 import { data } from 'autoprefixer';
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider';
 
 const SignUp = () => {
+    const navigate = useNavigate();
     const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const userInfo = {
@@ -19,7 +20,8 @@ const SignUp = () => {
                 console.log(user);
                 updateUser(userInfo)
                     .then(() => {
-                        toast.warning('User Profile Updated!')
+                        toast.warning('User Profile Updated!');
+                        navigate('/');
                     })
                     .catch(err => toast.error(err.message))
 

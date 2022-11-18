@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider';
 
 const Login = () => {
     const { SignIn, googleSignIn } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate();
     // const [data, setData] = useState("");
     // const onSubmit = data => console.log(data);
     const handleSignIn = data => {
@@ -14,7 +15,8 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast.success('SignIn Successfully.')
+                toast.success('SignIn Successfully.');
+                navigate('/')
             })
             .catch(error => toast.error(error.message))
     }
@@ -24,7 +26,8 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast.success('SignIn Successfully.')
+                toast.success('SignIn Successfully.');
+                navigate('/')
             })
             .catch(err => toast.error(err.message))
     }
