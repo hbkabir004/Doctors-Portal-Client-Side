@@ -4,7 +4,7 @@ import SignUp from "../components/Auth/SignUp";
 import About from "../components/Pages/About";
 import Appointment from "../components/Pages/Appointment/Appointment";
 import ContactUs from "../components/Pages/ContactUs";
-import Dashboard from "../components/Pages/Dashboard";
+import MyAppointment from "../components/Pages/Dashboard/MyAppointment";
 import ErrorPage from "../components/Pages/ErrorPage";
 import Home from "../components/Pages/Home/Home";
 import Reviews from "../components/Pages/Reviews";
@@ -57,8 +57,8 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <Dashboard></Dashboard>
-            }
+                element: <MyAppointment></MyAppointment>
+            },
         ]
     }
 ])
