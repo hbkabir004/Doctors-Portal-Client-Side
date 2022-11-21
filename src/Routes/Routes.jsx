@@ -4,12 +4,14 @@ import SignUp from "../components/Auth/SignUp";
 import About from "../components/Pages/About";
 import Appointment from "../components/Pages/Appointment/Appointment";
 import ContactUs from "../components/Pages/ContactUs";
+import AllUsers from "../components/Pages/Dashboard/AllUsers";
 import MyAppointment from "../components/Pages/Dashboard/MyAppointment";
 import ErrorPage from "../components/Pages/ErrorPage";
 import Home from "../components/Pages/Home/Home";
 import Reviews from "../components/Pages/Reviews";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
+import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -58,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <MyAppointment></MyAppointment>
+            },
+            {
+                path: '/dashboard/allusers',
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
         ]
     }

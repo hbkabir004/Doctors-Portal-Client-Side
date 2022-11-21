@@ -1,14 +1,20 @@
 import { data } from 'autoprefixer';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const navigate = useNavigate();
     const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [createdUserEmail, setCreatedUserEmail] = useState('');
+    const [token] = useToken(createdUserEmail);
+    if(token){
+        navigate('/');
+    }
     const userInfo = {
         displayName: data.name,
     }
@@ -21,7 +27,7 @@ const SignUp = () => {
                 updateUser(userInfo)
                     .then(() => {
                         toast.warning('User Profile Updated!');
-                        navigate('/');
+                        saveUser(data.name, data.email)
                     })
                     .catch(err => toast.error(err.message))
 
@@ -38,6 +44,22 @@ const SignUp = () => {
                 toast.success('User Created Successfully.');
             })
             .catch(err => toast.error(err.message))
+    }
+
+    const saveUser = (name, email) => {
+        const user = { name, email };
+        fetch(`http://localhost:5000/users`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setCreatedUserEmail(email);
+            })
+
     }
 
     return (
